@@ -1,31 +1,30 @@
-from typing import Optional
-from leetcode.utils import ListNode
+from typing import List
 
 
 class Solution:
-    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if head is None:
-            return None
+    def numIslands(self, grid: List[List[str]]) -> int:
+        rows = len(grid)
+        columns = len(grid[0])
 
-        # ダミーノードを作成して、先頭を簡単に管理できるようにする
-        dummy = ListNode(0)
-        dummy.next = head
-        prev = dummy
-        current = head
+        unvisited = set((x, y) for x in range(rows) for y in range(columns))
+        island_count = 0
 
-        while current is not None:
-            # currentが重複している場合、次の重複しないノードまで進む
-            if current.next and current.val == current.next.val:
-                # 重複している値を記録
-                duplicate_val = current.val
-                # 重複をスキップ
-                while current and current.val == duplicate_val:
-                    current = current.next
-                # 前のノードのnextを、重複しないノードにリンクする
-                prev.next = current
-            else:
-                # 重複がなければ、prevを進める
-                prev = current
-                current = current.next
+        def visitIsland(x: int, y: int):
+            adjacents = [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
+            for nx, ny in adjacents:
+                # Check if the point is within bounds
+                if 0 <= nx < rows and 0 <= ny < columns:
+                    if (nx, ny) in unvisited:
+                        unvisited.remove((nx, ny))
+                        if grid[nx][ny] == "1":
+                            visitIsland(nx, ny)  # Recursively visit adjacent land cells
 
-        return dummy.next
+        for x in range(rows):
+            for y in range(columns):
+                if (x, y) in unvisited:
+                    unvisited.remove((x, y))
+                    if grid[x][y] == "1":
+                        visitIsland(x, y)
+                        island_count += 1
+
+        return island_count
