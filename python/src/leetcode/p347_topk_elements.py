@@ -38,6 +38,3 @@ class Solution:
         for i in range(k):
             m = heapq.heappop()
             result.append(m[1])
-
-
-

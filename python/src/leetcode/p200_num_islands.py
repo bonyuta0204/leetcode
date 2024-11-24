@@ -28,18 +28,3 @@ class Solution:
                         island_count += 1
 
         return island_count
-
-
-class Point:
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
-class Grid:
-    def __init__(self, grid: List[List[str]]):
-        self.grid = grid
-        self.height = len(grid)
-        self.width = len(grid[0]) if grid[0] else 0
-
-    def is_valid_pos(self,pos: Point):
-        if 0 <= pos.x <= self.
-

@@ -1,6 +1,7 @@
 from typing import Optional
 from leetcode.utils import ListNode
 
+
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
         visited = set()
@@ -12,5 +13,3 @@ class Solution:
                 visited.add(head)
                 head = head.next
         return None
-
-
