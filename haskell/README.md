@@ -30,40 +30,44 @@ This repository contains Haskell solutions for LeetCode problems.
 
 ## Running Solutions
 
-There are two main ways to run and test the solutions:
+There are several ways to work with the solutions:
 
-### Using GHCi (REPL)
+### 1. Direct Loading in GHCi (Recommended for Problem Solving)
 
-1. Start GHCi with the project loaded:
+This is the most straightforward way to work on individual problems:
+
+1. Start GHCi:
    ```bash
    stack ghci
    ```
 
-2. Import the modules you want to use:
+2. Load the specific problem file:
    ```haskell
-   import qualified Solutions.P104 as P104  -- For specific problem
-   import Lib.Types (TreeNode(..))         -- For common types
-   import Lib.TreeHelper (createTree)      -- For helper functions
+   :l src/Solutions/P104.hs
    ```
 
-3. Run examples or create your own test cases:
+3. Create and test inputs directly:
    ```haskell
-   -- Run the example test cases
-   P104.runExample
-
-   -- Create and test your own inputs
-   let myTree = createTree [Just 1, Just 2, Just 3]
-   P104.maxDepth myTree
+   -- Create a simple tree: Node (Edge 1) (Edge 2) 3
+   let a = Edge 1
+   let b = Edge 2
+   let c = Node a b 3
+   
+   -- Test the solution
+   maxDepth c
    ```
 
-### Compiled Mode
 
-1. Build the project:
+### 2. Compiled Mode
+
+Run all examples through the executable:
+
+1. Build:
    ```bash
    stack build
    ```
 
-2. Run the executable to see all example test cases:
+2. Run:
    ```bash
    stack exec leetcode-haskell-exe
    ```
@@ -96,6 +100,5 @@ The project is organized into three main parts:
 ## Testing
 
 You can:
-1. Use GHCi for interactive testing
+1. Load individual problems in GHCi for interactive testing
 2. Run the executable to see all examples
-3. Create proper test modules using HUnit or QuickCheck
