@@ -1,0 +1,31 @@
+cabal-version:       2.2
+
+name:                leetcode-haskell
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/githubuser/leetcode-haskell#readme
+license:             BSD-3-Clause
+license-file:        LICENSE
+author:              Yuta Nakamura
+maintainer:          nakamurayuta0204@gmail.com
+copyright:           2024 Yuta Nakamura
+category:            Web
+build-type:          Simple
+extra-source-files:  README.md
+                     CHANGELOG.md
+
+executable leetcode-haskell
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+  ghc-options:         -Wall
+                       -Wcompat
+                       -Widentities
+                       -Wincomplete-record-updates
+                       -Wincomplete-uni-patterns
+                       -Wmissing-export-lists
+                       -Wmissing-home-modules
+                       -Wpartial-fields
+                       -Wredundant-constraints
