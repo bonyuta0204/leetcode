@@ -1,10 +1,11 @@
 module Solutions.P104
-  ( maxDepth
-  , runExample
-  ) where
+  ( maxDepth,
+    runExample,
+  )
+where
 
-import Lib.Types (TreeNode(..))
 import Lib.TreeHelper (createTree)
+import Lib.Types (TreeNode (..))
 
 -- | Maximum Depth of Binary Tree
 -- | Given the root of a binary tree, return its maximum depth.
