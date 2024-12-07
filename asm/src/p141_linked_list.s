@@ -21,34 +21,34 @@ main:
 
     sub rsp, 16      ;; assign two pointer n_ptr1(rsp) and n_ptr2(rsp + 8)
 
-    MOV [rsp], dword node1       ;; set both pointer to node1
-    MOV [rsp + 8], dword node1
+    MOV qword [rsp], node1       ;; set both pointer to node1
+    MOV qword [rsp + 8], node1
 
     jmp loop
     jmp abort
 
 
 loop:
-    MOV rsi, [rsp]
+    MOV rdi, [rsp]
     CALL next_node
-    cmp DWORD [next_node + 8], 0 ;; check if reach to end
-    jmp success
+    cmp qword [rax + 8], 0 ;; check if reach to end
+    je success
     MOV [rsp], rax ;; move n_ptr1 to next_node
 
 
-    MOV rsi, [rsp + 8]
+    MOV rdi, [rsp + 8]
     CALL next_node
-    cmp DWORD [next_node + 8], 0 ;; check if reach to end
-    jmp success
-    MOV rsi, rax
+    cmp qword [rax + 8], 0 ;; check if reach to end
+    je success
+    MOV rdi, rax
     CALL next_node
-    cmp DWORD [next_node + 8],  0 ;; check if reach to end
-    jmp success
+    cmp qword [rax + 8],  0 ;; check if reach to end
+    je success
     MOV [rsp + 8], rax ;; move n_ptr1 to next, next_node
     MOV rax, [rsp]
     MOV rbx, [rsp + 8]
     cmp rax, rbx
-    jmp cycle
+    je cycle
     jmp loop
 
 success:
@@ -79,7 +79,9 @@ node1:
 node2:
     dd 10
     dd 0
-    dq 0
+    dq node3
 
-
-
+node3:
+    dd 10
+    dd 0
+    dq node1
