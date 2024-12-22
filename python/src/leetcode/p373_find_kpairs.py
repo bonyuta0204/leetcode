@@ -4,26 +4,33 @@ import heapq
 class Solution:
     def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
         """
-        Basic idea is loop through and keep Kth-smallest set
-        We use max-heap and push the new element if it is smaller than current max
 
-        We try to reduce the computational cost by early returning if the element is largher than current max
+        example
+
+        1, 3, 5, 7, 9, 10
+        2, 4, 6, 8, 9, 10
+
         """
 
-        k_smallest = []
+        result = []
+
+        heap = []
+
+        for i in range(len(nums1)):
+            heap.append((nums1[i] + nums2[0], i, 0))
+
+        heapq.heapify(heap)
 
 
-        for i in nums1:
-            for j in nums2:
-                if len(k_smallest) < k:
-                    heapq.heappush(k_smallest, (- (i + j), (i, j)))
-                else:
-                    if k_smallest[0][0]  * -1 > i + j:
-                        heapq.heappop(k_smallest)
-                        heapq.heappush(k_smallest, ( - (i + j), (i,  j)))
-                    else:
-                        # we can early return since the array is sorted
-                        break
-        return [pairs for _, pairs in k_smallest]
+        while len(result) < k:
+            print(heap)
+            _, i, j = heapq.heappop(heap)
+
+            result.append((nums1[i], nums2[j]))
+
+            if j < len(nums2) - 1:
+                heapq.heappush(heap, (nums1[i] + nums2[j + 1],  i, j + 1))
+
+        return result
 
 
