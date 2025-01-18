@@ -5,29 +5,19 @@ class Solution:
         subarray
          whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.
         """
+        left, total = 0, 0
 
-        if not nums:
-            return 0
-        start_idx = 0
-        end_idx = 0
-        current_sum = nums[0]
-        min_len = None
+        min_len = float("inf")
 
-        while True:
-            if current_sum < target:
-                end_idx += 1
-                if end_idx < len(nums):
-                    current_sum += nums[end_idx]
-                else:
-                    break
-            else:
-                current_len = end_idx - start_idx + 1
-                if not min_len or current_len < min_len:
-                    min_len = current_len
+        for right in range(len(nums)):
+            total += nums[right]
 
-                current_sum -= nums[start_idx]
-                start_idx += 1
-        return min_len or 0
+            while total >= target:
+                min_len = min(right - left + 1, min_len)
 
+                total -= nums[left]
+                left += 1
+
+        return 0 if min_len == float("inf") else  min_len
 
 
